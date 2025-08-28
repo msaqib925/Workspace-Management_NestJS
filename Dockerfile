@@ -8,7 +8,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --production
+RUN npm install
+
+# Install Nest CLI globally (important for build step)
+RUN npm install -g @nestjs/cli
 
 # Copy the rest of the application code
 COPY . .

@@ -7,6 +7,7 @@ import { LoginDto } from './dto/login.dto';
 import { EmailService } from './email/email.service';
 import { randomBytes } from 'crypto';
 import { ForgotPasswordDto } from './dto/forgotpassword.dto';
+import { ResetPasswordDto } from './dto/resetPassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -71,6 +72,21 @@ export class AuthService {
         await this.emailService.sendResetPasswordEmail(user.email, token);
 
         return { message: 'Check your email for password reset instructions' }
+    }
+
+    async resetPassword(dto: ResetPasswordDto) {
+        const user = await this.prisma.user.findFirst({ where: { resetPasswordToken: dto.token } });
+        if (!user) throw new BadRequestException('Invalid token');
+        if (!user.resetTokenExpiry || user.resetTokenExpiry < new Date())
+            throw new BadRequestException('Token expired');
+
+        const hashed = await bcrypt.hash(dto.newPassword, 10);
+        await this.prisma.user.update({
+            where: { id: user.id },
+            data: { password: hashed, resetPasswordToken: null, resetTokenExpiry: null },
+        });
+
+        return { message: 'Password reset sunccessful' }
     }
 
 }

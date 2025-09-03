@@ -14,14 +14,30 @@ datasource db {
 }
 
 model User {
-  id                 Int       @id @default(autoincrement())
-  email              String    @unique
+  id                 Int         @id @default(autoincrement())
+  email              String      @unique
   name               String
   password           String
-  isVerified         Boolean   @default(false)
+  isVerified         Boolean     @default(false)
+  role               Role        @default(USER) // Default USER, OWNER only if no owner existss
   verificationToken  String?
   resetPasswordToken String?
   resetTokenExpiry   DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+  workspace          Workspace[]
+}
+
+enum Role {
+  USER
+  OWNER
+}
+
+model Workspace {
+  id        Int      @id @default(autoincrement())
+  name      String
+  ownerId   Int
+  owner     User     @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

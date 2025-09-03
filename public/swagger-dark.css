@@ -1,0 +1,44 @@
+/* General dark theme */
+body { background-color: #121212; color: #ffffff !important; }
+.swagger-ui, .swagger-ui * { color: #ffffff !important; }
+
+/* Scheme container */
+.swagger-ui .scheme-container { background: #121212; border-top: 1px solid #273600; border-bottom: 1px solid #273600;}
+
+/* Inputs and selects */
+.swagger-ui input[type=text] { border: 1px solid #101113ff; background: #1f1f1f !important; }
+.swagger-ui select { background: #1f1f1f; border: 1px solid #101113ff !important; }
+
+/* Execute buttons */
+.opblock-get .btn.execute { background-color: #0062d2ff !important; border-color: #002a5aff !important; }
+.opblock-post .btn.execute { background-color: #005b03ff !important; border-color: #003302ff !important; }
+.opblock-patch .btn.execute { background-color: #238973ff !important; border-color: #003c2fff !important; }
+.opblock-put .btn.execute { background-color: #ca8a00ff !important; border-color: #503700ff !important; }
+.opblock-delete .btn.execute { background-color: #9e0b00ff !important; border-color: #400400ff !important; }
+
+/* Textareas & modals */
+.swagger-ui textarea { background: #0d120f; }
+.swagger-ui .dialog-ux .modal-ux { background: #0f0303; border: 1px solid #ff6060; }
+
+/* Topbar & blocks */
+.swagger-ui .topbar { display: none !important; }
+.swagger-ui .opblock { background-color: #1f1f1f; border-color: #333; }
+.swagger-ui .opblock-summary { background-color: #2a2a2a; }
+.swagger-ui .opblock-section-header { background: #000000 !important; }
+.swagger-ui .btn { background: #333; color: #ffffff !important; }
+
+/* Tables & models */
+.swagger-ui .opblock-description-wrapper p,
+.swagger-ui .response-col_description__inner,
+.swagger-ui .model-box,
+.swagger-ui table.model tr,
+.swagger-ui table.model td,
+.swagger-ui table.model th { color: #ffffff !important; }
+.swagger-ui section.models .model-box { background: #000000; }
+
+/* Authorization button */
+.swagger-ui .authorization__btn { fill: #ffffff; }
+.swagger-ui .authorization__btn .unlocked { opacity: 1 !important; }
+
+/* Chevron */
+.swagger-ui .expand-operation , .swagger-ui .opblock-control-arrow {fill: #ffffff;}

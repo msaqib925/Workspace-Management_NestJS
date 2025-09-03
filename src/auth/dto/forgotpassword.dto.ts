@@ -4,7 +4,7 @@ import { IsEmail } from "class-validator";
 export class ForgotPasswordDto {
     @ApiProperty({
         example: 'saqib@gmail.com',
-        description: 'Unique email address of user'
+        description: 'Registered email address of user'
     })
     @IsEmail()
     email: string;

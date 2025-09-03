@@ -1,0 +1,19 @@
+node_modules
+npm-debug.log
+dist
+.git
+.gitignore
+README.md
+.env*
+!.env.example
+.nyc_output
+coverage
+.npm
+.eslintcache
+.DS_Store
+*.log
+.vscode
+.idea
+test
+# Explicitly include store directory
+!store/

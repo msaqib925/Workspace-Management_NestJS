@@ -24,11 +24,6 @@ export class AuthService {
 
   // ------------------ REGISTER ------------------
   async register(dto: RegisterDto) {
-    const ownerExists = await this.prisma.user.findFirst({
-      where: { role: 'OWNER' },
-    });
-
-    const role = ownerExists ? 'USER' : 'OWNER';
 
     const existing = await this.prisma.user.findUnique({
       where: { email: dto.email },
@@ -45,7 +40,6 @@ export class AuthService {
         name: dto.name,
         password: hashedPassword,
         verificationToken,
-        role,
       },
     });
 

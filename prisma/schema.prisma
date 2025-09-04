@@ -14,30 +14,91 @@ datasource db {
 }
 
 model User {
-  id                 Int         @id @default(autoincrement())
-  email              String      @unique
+  id                 String            @id @default(cuid())
+  email              String            @unique
   name               String
   password           String
-  isVerified         Boolean     @default(false)
-  role               Role        @default(USER) // Default USER, OWNER only if no owner existss
+  isVerified         Boolean           @default(false)
   verificationToken  String?
   resetPasswordToken String?
   resetTokenExpiry   DateTime?
-  createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @updatedAt
-  workspace          Workspace[]
-}
-
-enum Role {
-  USER
-  OWNER
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  workspaces         WorkspaceMember[]
+  brands             BrandMember[]
+  Workspace          Workspace[]
 }
 
 model Workspace {
-  id        Int      @id @default(autoincrement())
+  id        String            @id @default(cuid())
   name      String
-  ownerId   Int
-  owner     User     @relation(fields: [ownerId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ownerId   String
+  owner     User              @relation(fields: [ownerId], references: [id])
+  members   WorkspaceMember[]
+  brands    Brand[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model WorkspaceMember {
+  id          String        @id @default(cuid())
+  userId      String
+  workspaceId String
+  role        WorkspaceRole
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([workspaceId, userId])
+}
+
+model Brand {
+  id          String        @id @default(cuid())
+  name        String
+  workspaceId String
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id])
+  members     BrandMember[]
+  campaigns   Campaign[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model BrandMember {
+  id      String    @id @default(cuid())
+  userId  String
+  brandId String
+  role    BrandRole
+
+  brand Brand @relation(fields: [brandId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@unique([brandId, userId])
+}
+
+model Campaign {
+  id        String         @id @default(cuid())
+  name      String
+  status    CampaignStatus @default(DRAFT)
+  brandId   String
+  brand     Brand          @relation(fields: [brandId], references: [id])
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+enum WorkspaceRole {
+  ADMIN
+  USER
+}
+
+enum BrandRole {
+  ADMIN
+  MANAGER
+  CLIENT
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  ARCHIVED
 }

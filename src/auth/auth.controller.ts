@@ -11,7 +11,6 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { ForgotPasswordDto } from './dto/forgotpassword.dto';
 import { ResetPasswordDto } from './dto/resetPassword.dto';
-import { JwtAuthGuard } from './jwt-auth-guard';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -199,20 +198,6 @@ export class AuthController {
   resetPassword(@Body() dto: ResetPasswordDto) {
     return this.authService.resetPassword(dto);
   }
-  // FALTU
-
-  @Patch('hello')
-  getHello(message: string) {
-    return this.authService.getHello(message)
-  }
-
-  @Put('put')
-  getPut(message: string) {
-    return this.authService.getHello(message)
-  }
-
-
-
 }
 
 

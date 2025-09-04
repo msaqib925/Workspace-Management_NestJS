@@ -23,7 +23,6 @@ body { background-color: #121212; color: #ffffff !important; }
 /* Topbar & blocks */
 .swagger-ui .topbar { display: none !important; }
 .swagger-ui .opblock { background-color: #1f1f1f; border-color: #333; }
-.swagger-ui .opblock-summary { background-color: #2a2a2a; }
 .swagger-ui .opblock-section-header { background: #000000 !important; }
 .swagger-ui .btn { background: #333; color: #ffffff !important; }
 
@@ -41,4 +40,4 @@ body { background-color: #121212; color: #ffffff !important; }
 .swagger-ui .authorization__btn .unlocked { opacity: 1 !important; }
 
 /* Chevron */
-.swagger-ui .expand-operation , .swagger-ui .opblock-control-arrow {fill: #ffffff;}
+.swagger-ui .expand-operation , .swagger-ui .opblock-control-arrow {fill: #ffffffac;}

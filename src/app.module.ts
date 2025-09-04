@@ -4,8 +4,10 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config'
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { ProfileModule } from './profile/profile.module';
+import { ProfileModule } from './profile/profile.module'
+import { WorkspaceModule } from './workspace/workspace.module';
+import { BrandModule } from './brand/brand.module';
+import { CampaignModule } from './campaign/campaign.module';
 import Joi from 'joi';
 
 
@@ -17,7 +19,7 @@ import Joi from 'joi';
       JWT_SECRET: Joi.string().required(),
       JWT_EXPIRES_IN: Joi.string().default('1d'),
     }),
-  }), PrismaModule, AuthModule, UserModule, ProfileModule],
+  }), PrismaModule, AuthModule, ProfileModule, WorkspaceModule, BrandModule, CampaignModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -20,7 +20,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest<TUser = any>(err: any, user: any, info: any): TUser {
     if (err || !user) {
-      throw err || new UnauthorizedException('Missing or invalid token');
+      throw err || new UnauthorizedException('Authentication failed');
     }
     return user;
   }
